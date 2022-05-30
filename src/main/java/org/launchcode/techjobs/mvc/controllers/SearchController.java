@@ -28,9 +28,11 @@ public class SearchController {
     }
 
     @PostMapping("results")
-    public String displaySearchResults(Model model,@RequestParam String searchTerm, @RequestParam String searchType){
+    public String displaySearchResults(Model model,@RequestParam String searchType, @RequestParam String searchTerm){
 
-        ArrayList<Job> jobs;
+        /*ArrayList<Job> jobs;
+
+
 
 
         //If the user enters “all” in the search box, or if they leave the box empty,
@@ -39,16 +41,27 @@ public class SearchController {
         // Pass jobs into the search.html view via the model parameter.
         //Pass ListController.columnChoices into the view, as the existing search handler does.
 
-        if(searchTerm.toLowerCase().equals("all")||searchTerm.toLowerCase().equals("")) {
+        if(searchTerm.trim().toLowerCase().equals("all")||searchTerm.trim().equals("")) {
            jobs = JobData.findAll();
             model.addAttribute("title","All jobs");
         }else {
           jobs = JobData.findByColumnAndValue(searchType,searchTerm);
-          model.addAttribute("title", "Search Condition: " + columnChoices.get(searchType) + " Search Term: " + searchTerm);
+          model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
 
         }
 
+        model.addAttribute("jobs", jobs);
         model.addAttribute("columns", columnChoices);
+
+
+        return "search";*/
+
+        ArrayList<Job> jobs;
+        jobs = JobData.findByColumnAndValue(searchType, searchTerm);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("searchTerm", searchTerm);
+        model.addAttribute("columns", columnChoices);
+        model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
         model.addAttribute("jobs", jobs);
 
         return "search";
