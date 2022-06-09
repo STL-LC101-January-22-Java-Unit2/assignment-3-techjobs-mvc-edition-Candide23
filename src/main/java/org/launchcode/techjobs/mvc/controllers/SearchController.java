@@ -30,10 +30,7 @@ public class SearchController {
     @PostMapping("results")
     public String displaySearchResults(Model model,@RequestParam String searchType, @RequestParam String searchTerm){
 
-        /*ArrayList<Job> jobs;
-
-
-
+        ArrayList<Job> jobs;
 
         //If the user enters “all” in the search box, or if they leave the box empty,
         // call the findAll() method from JobData. Otherwise, send the search information
@@ -54,17 +51,9 @@ public class SearchController {
         model.addAttribute("columns", columnChoices);
 
 
-        return "search";*/
-
-        ArrayList<Job> jobs;
-        jobs = JobData.findByColumnAndValue(searchType, searchTerm);
-        model.addAttribute("searchType", searchType);
-        model.addAttribute("searchTerm", searchTerm);
-        model.addAttribute("columns", columnChoices);
-        model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
-        model.addAttribute("jobs", jobs);
-
         return "search";
+
+
     }
 
     // TODO #3 - Create a handler to process a search request and render the updated search view.
